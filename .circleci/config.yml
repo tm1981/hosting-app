@@ -8,7 +8,7 @@ jobs:
       - image: "cimg/base:stable" 
     steps:
       - node/install:
-          version: 12.22.5
+          node-version: 12.22.5
       - checkout
       - aws-cli/install
       - run:
