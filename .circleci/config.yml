@@ -13,6 +13,7 @@ jobs:
       - run:
           name: build server
           command: |
+            npm run install:server
             npm run build:server
       - run: 
           name: Elastic Beanstalk Server
