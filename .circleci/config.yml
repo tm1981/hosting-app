@@ -1,0 +1,25 @@
+version: 2.1
+orbs:
+  node: circleci/node@4.7.0
+  aws-cli: circleci/aws-cli@2.0.3
+jobs:
+  udagram-api:
+    docker:
+      - image: "cimg/base:stable" 
+    steps:
+      - node/install
+      - checkout
+      - aws-cli/install
+      - run:
+          name: build server
+          command: |
+            npm run build:server
+      - run: 
+          name: Elastic Beanstalk Server
+          command: |
+            aws s3 cp ./www/Archive.zip s3://udagram-api
+            aws elasticbeanstalk create-application-version --application-name 	udagram-api --version-label <<pipeline.git.revision>> --source-bundle S3Bucket="udagram-api",S3Key="Archive.zip"
+            aws elasticbeanstalk update-environment --application-name udagram-api --environment-name $EB_ENV --version-label <<pipeline.git.revision>>
+
+
+    
