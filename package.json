@@ -1,6 +1,7 @@
 
 {
     "scripts": {
+        "install:server": "cd udagram-api && npm install", 
         "build:server": "cd udagram-api && npm run build"
     },
     "devDependencies": {}
