@@ -9,6 +9,7 @@ jobs:
     steps:
       - node/install:
           node-version: 12.22.5
+          npm-version: 6.14.14
       - checkout
       - aws-cli/install
       - run:
