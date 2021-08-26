@@ -22,7 +22,7 @@ jobs:
       - run: 
           name: Elastic Beanstalk Server
           command: |
-            aws s3 cp .udagram-api/www/Archive.zip s3://udagram-api
+            aws s3 cp ./udagram-api/www/Archive.zip s3://udagram-api
             aws elasticbeanstalk create-application-version --application-name 	udagram-api --version-label <<pipeline.git.revision>> --source-bundle S3Bucket="udagram-api",S3Key="Archive.zip"
             aws elasticbeanstalk update-environment --application-name udagram-api --environment-name Udagramapi-env-2 --version-label <<pipeline.git.revision>>
 workflows:
