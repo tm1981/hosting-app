@@ -15,8 +15,6 @@ jobs:
       - run:
           name: build server
           command: |
-            node -v
-            npm -v
             npm run install:server
             npm run build:server
       - run: 
@@ -25,6 +23,18 @@ jobs:
             aws s3 cp ./udagram-api/www/Archive.zip s3://udagram-api
             aws elasticbeanstalk create-application-version --application-name 	udagram-api --version-label <<pipeline.git.revision>> --source-bundle S3Bucket="udagram-api",S3Key="Archive.zip"
             aws elasticbeanstalk update-environment --application-name udagram-api --environment-name Udagramapi-env --version-label <<pipeline.git.revision>>
+  udagram-frontend:
+    docker:
+      - image: "cimg/base:stable" 
+    steps:
+      - node/install
+      - checkout
+      - aws-cli/install
+      - run:
+          name: build frontend
+          command: |
+            npm run install:frontend
+            npm run build:frontend
 workflows:
   build_and_deploy:
     jobs:

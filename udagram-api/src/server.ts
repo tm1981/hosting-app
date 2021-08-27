@@ -10,12 +10,7 @@ import { V0_FEED_MODELS, V0_USER_MODELS } from "./controllers/v0/model.index";
 
 (async () => {
   dotenv.config();
-
-  console.log ("show env: " + process.env.POSTGRES_DB)
-  console.log ("show env: " + process.env.POSTGRES_HOST)
-  console.log ("show env: " + process.env.POSTGRES_USERNAME)
-  console.log ("show env: " + process.env.POSTGRES_PASSWORD)
-
+  
   await sequelize.addModels(V0_FEED_MODELS);
   await sequelize.addModels(V0_USER_MODELS);
   console.log("connecting to db")
