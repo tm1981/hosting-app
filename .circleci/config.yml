@@ -35,7 +35,13 @@ jobs:
           command: |
             npm run install:frontend
             npm run build:frontend
+      - run:
+          name: deploy frontend
+          command: |
+            aws s3 cp --recursive --acl public-read ./udagram-frontend/www s3://udagram-front
+                 
 workflows:
   build_and_deploy:
     jobs:
       - udagram-api
+      - udagram-frontend
