@@ -8,17 +8,22 @@ jobs:
       - image: "cimg/base:stable" 
     steps:
       - node/install:
+          # a node version that work with the udagram-api
           node-version: 12.22.5
           npm-version: 6.14.8
       - checkout
       - aws-cli/install
       - run:
+          # install npm dependencies and building the app
           name: build server
           command: |
             npm run install:server
             npm run build:server
       - run: 
           name: Elastic Beanstalk Server
+          # copying the Archive.zip file after the build to s3 bucket
+          # creating new elasticbeanstalk version with new files
+          # updating the ebenvironment
           command: |
             aws s3 cp ./udagram-api/www/Archive.zip s3://udagram-api
             aws elasticbeanstalk create-application-version --application-name 	udagram-api --version-label <<pipeline.git.revision>> --source-bundle S3Bucket="udagram-api",S3Key="Archive.zip"
@@ -27,9 +32,9 @@ jobs:
     docker:
       - image: "cimg/base:stable" 
     steps:
-      - node/install
-      - checkout
-      - aws-cli/install
+      - node/install # install npm
+      - checkout #checkout the code
+      - aws-cli/install #install aws cli
       - run:
           name: build frontend
           command: |
@@ -37,6 +42,7 @@ jobs:
             npm run build:frontend
       - run:
           name: deploy frontend
+          # copy the files that was build from angular build command and copy them to s3 that has static web hosting enabled
           command: |
             aws s3 cp --recursive --acl public-read ./udagram-frontend/www s3://udagram-front
                  
