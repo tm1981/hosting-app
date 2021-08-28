@@ -18,14 +18,15 @@ import { V0_FEED_MODELS, V0_USER_MODELS } from "./controllers/v0/model.index";
 
   console.log("Database Connected");
 
-  console.log("testing env " + process.env.TEST_ENV);
+  console.log("testing aws key " + process.env.AWS_ACCESS_KEY);
 
   const app = express();
-  const port = process.env.PORT || 3000;
+  const port = 8080;
 
   app.use(bodyParser.json());
 
   app.use(cors());
+
 
   app.use("/api/v0/", IndexRouter);
 

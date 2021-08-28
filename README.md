@@ -15,6 +15,10 @@ I will use circleci service for Continuous Integration
 - /screenshots/Elastic Beanstalk.jpg - contain the elastic beanstalk app for udagram-api
 - /screenshots/rds.jpg - contain the postgres db server
 
+## Links
+- Udagram API link [http://udagramapi-env.eba-cpreupwy.us-east-1.elasticbeanstalk.com/api/v0](http://udagramapi-env.eba-cpreupwy.us-east-1.elasticbeanstalk.com/api/v0)
+- Udagram Frontend link [http://udagram-front.s3-website-us-east-1.amazonaws.com/](http://udagram-front.s3-website-us-east-1.amazonaws.com/)
+
 
 
 

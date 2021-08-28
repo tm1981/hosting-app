@@ -13,7 +13,7 @@ jobs:
           node-version: 12.22.5
           npm-version: 6.14.8
       - checkout
-      - aws-cli/install
+      - eb/setup
       - run:
           # install npm dependencies and building the app
           name: build server
@@ -22,13 +22,13 @@ jobs:
             npm run build:server
       - run: 
           name: Elastic Beanstalk Server
-          # copying the Archive.zip file after the build to s3 bucket
-          # creating new elasticbeanstalk version with new files
-          # updating the ebenvironment
+          # deploy the app with environment variables
           command: |
-            aws s3 cp ./udagram-api/www/Archive.zip s3://udagram-api
-            aws elasticbeanstalk create-application-version --application-name 	udagram-api --version-label <<pipeline.git.revision>> --source-bundle S3Bucket="udagram-api",S3Key="Archive.zip"
-            aws elasticbeanstalk update-environment --application-name udagram-api --environment-name Udagramapi-env --version-label <<pipeline.git.revision>>
+            cd udagram-api
+            eb use Udagramapi-env
+            eb setenv AWS_BUCKET=$AWS_BUCKET AWS_ACCESS_KEY=$AWS_ACCESS_KEY AWS_REGION=$AWS_REGION AWS_SECRET=$AWS_SECRET JWT_SECRET=$JWT_SECRET POSTGRES_DB=$POSTGRES_DB POSTGRES_HOST=$POSTGRES_HOST POSTGRES_PASSWORD=$POSTGRES_PASSWORD POSTGRES_USERNAME=$POSTGRES_USERNAME 
+            eb deploy
+            cd..
   udagram-frontend:
     docker:
       - image: "cimg/base:stable" 
