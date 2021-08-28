@@ -24,6 +24,7 @@ jobs:
           name: Elastic Beanstalk Server
           # deploy the app with environment variables
           command: |
+            eb init --region us-east-1 --platform node.js-12 udagram-api
             cd udagram-api
             eb use Udagramapi-env
             eb setenv AWS_BUCKET=$AWS_BUCKET AWS_ACCESS_KEY=$AWS_ACCESS_KEY AWS_REGION=$AWS_REGION AWS_SECRET=$AWS_SECRET JWT_SECRET=$JWT_SECRET POSTGRES_DB=$POSTGRES_DB POSTGRES_HOST=$POSTGRES_HOST POSTGRES_PASSWORD=$POSTGRES_PASSWORD POSTGRES_USERNAME=$POSTGRES_USERNAME 
@@ -51,8 +52,4 @@ workflows:
   build_and_deploy:
     jobs:
       - udagram-api
-      - eb/deploy:
-          app-dir: ./udagram-api
-          application-name: udagram-api
-          environment-name: Udagramapi-env
       - udagram-frontend
