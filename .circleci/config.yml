@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@4.7.0
   aws-cli: circleci/aws-cli@2.0.3
-  aws-elastic-beanstalk: circleci/aws-elastic-beanstalk@2.0.1
+  eb: circleci/aws-elastic-beanstalk@2.0.1
 jobs:
   udagram-api:
     docker:
@@ -13,10 +13,7 @@ jobs:
           node-version: 12.22.5
           npm-version: 6.14.8
       - checkout
-      - aws-elastic-beanstalk/setup:
-          app-dir: udagram-api 
-          application-name: udagram-api 
-          environment-name: Udagramapi-env 
+      - eb/setup
       - run:
           # install npm dependencies and building the app
           name: build server
