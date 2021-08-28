@@ -15,4 +15,4 @@ This full stack app use AWS services
 - a bucket for saving uploaded images
 
 ## Architecture Diagram
-![Architecture Diagram](./Architecture Diagram.jpg)
+![Architecture Diagram](./diagram.jpg)
