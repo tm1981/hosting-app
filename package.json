@@ -3,6 +3,7 @@
         "install:server": "cd udagram-api && npm install",
         "build:server": "cd udagram-api && npm run build",
         "install:frontend": "cd udagram-frontend && npm install",
+        "test:frontend": "cd udagram-frontend && npm run test",
         "build:frontend": "cd udagram-frontend && npm run build"
     },
     "devDependencies": {}
