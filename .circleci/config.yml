@@ -14,7 +14,6 @@ jobs:
           npm-version: 6.14.8
       - checkout
       - aws-cli/install
-      - eb/setup
       - run:
           # install npm dependencies and building the app
           name: build server
